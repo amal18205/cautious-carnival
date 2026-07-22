@@ -1,0 +1,17 @@
+name: Docker Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Télécharger le code
+      uses: actions/checkout@v4
+
+    - name: Construire image Docker
+      run: docker build -t todo-app .
