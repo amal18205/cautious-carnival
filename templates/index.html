@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My DevOps App</title>
+</head>
+
+<body>
+
+<h1>Ma liste de tâches</h1>
+
+<form action="/add" method="post">
+    <input name="task" placeholder="Nouvelle tâche">
+    <button type="submit">Ajouter</button>
+</form>
+
+<ul>
+{% for task in tasks %}
+<li>
+{{task}}
+<a href="/delete/{{loop.index0}}">Supprimer</a>
+</li>
+{% endfor %}
+</ul>
+
+</body>
+</html>
