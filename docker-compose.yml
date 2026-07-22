@@ -1,0 +1,17 @@
+services:
+
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
+
+  database:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: devops
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: tasksdb
+    ports:
+      - "5432:5432"
