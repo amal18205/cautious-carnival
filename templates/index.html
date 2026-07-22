@@ -1,26 +1,129 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My DevOps App</title>
+    <title>My Cute DevOps To-Do</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #dff6ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #fff8dc;
+            width: 450px;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff9f43;
+            font-size: 32px;
+        }
+
+        p {
+            color: #5dade2;
+        }
+
+        input {
+            width: 65%;
+            padding: 12px;
+            border-radius: 15px;
+            border: 2px solid #ffd166;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 15px;
+            background: #ffb347;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #ff8c42;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #bde0fe;
+            margin: 12px;
+            padding: 12px;
+            border-radius: 15px;
+            color: #34495e;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .emoji {
+            font-size: 40px;
+        }
+
+    </style>
 </head>
 
 <body>
 
-<h1>Ma liste de tâches</h1>
+<div class="container">
 
-<form action="/add" method="post">
-    <input name="task" placeholder="Nouvelle tâche">
-    <button type="submit">Ajouter</button>
-</form>
+    <div class="emoji">🌈✨</div>
 
-<ul>
-{% for task in tasks %}
-<li>
-{{task}}
-<a href="/delete/{{loop.index0}}">Supprimer</a>
-</li>
-{% endfor %}
-</ul>
+    <h1>My Cute Task List</h1>
+
+    <p>My first DevOps application 🚀</p>
+
+    <form action="/add" method="post">
+
+        <input 
+        name="task" 
+        placeholder="Add a new task 📝">
+
+        <button type="submit">
+            Add 🌼
+        </button>
+
+    </form>
+
+
+    <ul>
+
+    {% for task in tasks %}
+
+        <li>
+            <span>{{task[1]}}</span>
+
+            <a href="/delete/{{task[0]}}">
+                ❌
+            </a>
+
+        </li>
+
+    {% endfor %}
+
+    </ul>
+
+
+</div>
 
 </body>
 </html>
