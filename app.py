@@ -4,14 +4,15 @@ import time
 
 app = Flask(__name__)
 
+import os
+
 def get_db():
     return psycopg2.connect(
-        host="database",
-        database="tasksdb",
-        user="devops",
-        password="password"
+        host=os.getenv("DB_HOST", "database"),
+        database=os.getenv("DB_NAME", "tasksdb"),
+        user=os.getenv("DB_USER", "devops"),
+        password=os.getenv("DB_PASSWORD", "password")
     )
-
 
 def init_db():
     conn = get_db()

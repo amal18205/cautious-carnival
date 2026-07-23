@@ -4,6 +4,11 @@ services:
     build: .
     ports:
       - "5000:5000"
+    environment:
+      DB_HOST: database
+      DB_NAME: tasksdb
+      DB_USER: devops
+      DB_PASSWORD: password
     depends_on:
       - database
 
