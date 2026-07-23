@@ -35,6 +35,7 @@ jobs:
       env:
         DB_HOST: localhost
       run: |
+        python -c "from app import init_db; init_db()"
         python -m pytest
     - name: Construire image Docker
       run: docker build -t cautious-carnival-app:latest .
