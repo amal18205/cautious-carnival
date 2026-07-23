@@ -1,35 +1,43 @@
 name: Docker Build
-
 on:
   push:
     branches:
       - main
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    services:
+      database:
+        image: postgres:16
+        env:
+          POSTGRES_USER: devops
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: tasksdb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
     - name: Télécharger le code
       uses: actions/checkout@v4
-
     - name: Installer Python
       uses: actions/setup-python@v5
       with:
         python-version: "3.12"
-
     - name: Installer les dépendances
       run: |
         pip install -r requirements.txt
         pip install pytest
-
     - name: Lancer les tests
+      env:
+        DB_HOST: localhost
       run: |
         python -m pytest
-
     - name: Construire image Docker
       run: docker build -t cautious-carnival-app:latest .
-
     - name: Scan Docker image with Trivy
       uses: aquasecurity/trivy-action@master
       with:
